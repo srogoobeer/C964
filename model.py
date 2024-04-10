@@ -124,7 +124,7 @@ if option is not None:
         #st.image(option,width = 100)
         #st.write(prediction[0])
 else:
-    col1.image("Peach_Test.jpg",width=400)
+    col1.image("peach.jpg",width=400)
     col2.markdown("\n")
     col2.markdown("\n")
     col2.markdown("\n")
