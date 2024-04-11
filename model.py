@@ -1,17 +1,24 @@
 import keras
 import cv2
+import os
 import tensorflow as tf
 import pickle
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.utils import img_to_array
 import streamlit as st
+import urllib.request
 
 
 
 MAX_FILE_SIZE = 5 * 1024 * 1024  # This is the max size of image that use can upload
 
-model = keras.models.load_model("model.h5")  #Loading the save model to get predictions
+
+@st.cache_resource
+def load_model():
+    if not os.path.isfile('model.h5'):
+        urllib.request.urlretrieve('https://github.com/srogoobeer/C964/blob/master/model.h5', 'model.h5')
+    return keras.models.load_model('model.h5')
 
 
 with open('binarizer.pkl', 'rb') as f:    # Loading the binarizer file to inverse tranform the labels to convert them back into string
@@ -28,6 +35,7 @@ def get_prediction(img):        #Function will prepare the image according to th
         image_array = img_to_array(image)
         image_array = np.array(image_array/255.0)
         image_array = np.expand_dims(image_array, axis=0)
+        model = load_model()
         predictions = model.predict(image_array)
         predicted_class_label = label_binarizer.inverse_transform(predictions)
         return predicted_class_label
