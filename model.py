@@ -8,14 +8,20 @@ import tensorflow as tf
 from tensorflow.keras.utils import img_to_array
 import streamlit as st
 import urllib.request
+import subprocess
 
 
 
 MAX_FILE_SIZE = 5 * 1024 * 1024  # This is the max size of image that use can upload
 
 
-urllib.request.urlretrieve('https://github.com/srogoobeer/C964/blob/master/model.h5', 'model.h5')
-model = keras.models.load_model('model.h5')
+
+
+if not os.path.isfile('model.h5'):
+    subprocess.run(['curl --output model.h5 "https://github.com/srogoobeer/C964/blob/master/model.h5"'], shell=True)
+
+
+model = tf.keras.models.load_model('model.h5', compile=False)
 
 
 
