@@ -14,12 +14,9 @@ import urllib.request
 MAX_FILE_SIZE = 5 * 1024 * 1024  # This is the max size of image that use can upload
 
 
-def load_model():
-    if not os.path.isfile('model.h5'):
-        urllib.request.urlretrieve('https://github.com/srogoobeer/C964/blob/master/model.h5', 'model.h5')
-    return keras.models.load_model('model.h5')
+urllib.request.urlretrieve('https://github.com/srogoobeer/C964/blob/master/model.h5', 'model.h5')
+model = keras.models.load_model('model.h5')
 
-model = load_model()
 
 
 with open('binarizer.pkl', 'rb') as f:    # Loading the binarizer file to inverse tranform the labels to convert them back into string
