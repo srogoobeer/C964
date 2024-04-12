@@ -16,12 +16,10 @@ MAX_FILE_SIZE = 5 * 1024 * 1024  # This is the max size of image that use can up
 
 
 
-
-if not os.path.isfile('model.h5'):
-    subprocess.run(['curl --output model1.h5 "https://github.com/srogoobeer/C964/blob/master/model.h5"'], shell=True)
+urllib.request.urlretrieve('https://github.com/srogoobeer/C964/blob/master/model.h5', 'model1.h5')
 
 
-model = tf.keras.models.load_model('model1.h5', compile=False)
+model = keras.models.load_model('model1.h5', compile=False)
 
 
 
