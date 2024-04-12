@@ -1,4 +1,4 @@
-numpy>=1.24.3
+numpy>=1.22,<1.24
 opencv-python-headless>=4.9.0.80
 scikit-learn
 urllib3
