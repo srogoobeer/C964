@@ -19,6 +19,8 @@ def load_model():
         urllib.request.urlretrieve('https://github.com/srogoobeer/C964/blob/master/model.h5', 'model.h5')
     return keras.models.load_model('model.h5')
 
+  model = load_model()
+
 
 with open('binarizer.pkl', 'rb') as f:    # Loading the binarizer file to inverse tranform the labels to convert them back into string
     label_binarizer = pickle.load(f)
@@ -34,7 +36,6 @@ def get_prediction(img):        #Function will prepare the image according to th
         image_array = img_to_array(image)
         image_array = np.array(image_array/255.0)
         image_array = np.expand_dims(image_array, axis=0)
-        model = load_model()
         predictions = model.predict(image_array)
         predicted_class_label = label_binarizer.inverse_transform(predictions)
         return predicted_class_label
