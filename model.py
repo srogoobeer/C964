@@ -16,10 +16,7 @@ MAX_FILE_SIZE = 5 * 1024 * 1024  # This is the max size of image that use can up
 
 
 
-urllib.request.urlretrieve('https://github.com/srogoobeer/C964/blob/master/model.h5', 'model1.h5')
-
-
-model = keras.models.load_model('model1.h5', compile=False)
+model = keras.models.load_model('model.h5', compile=False)
 
 
 
