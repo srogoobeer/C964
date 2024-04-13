@@ -15,8 +15,14 @@ import subprocess
 MAX_FILE_SIZE = 5 * 1024 * 1024  # This is the max size of image that use can upload
 
 
+def load_model_from_drive(model_url):
+    model_path = '/content/model.h5'  # Path to save the downloaded model
+    gdown.download(model_url, model_path, quiet=False)  # Download the model from Google Drive
+    return load_model(model_path)  # Load the model using Keras
 
-model = keras.models.load_model('model.h5', compile=False)
+
+model_url = 'https://drive.google.com/uc?id=1sQMah-JAd_d4RmowifuNjYkah73rDZXa'
+model = load_model_from_drive(model_url)
 
 
 
